@@ -1,5 +1,6 @@
-*
+* {
+    auto_https off
+    file_server
+}
 
-file_server
 
-auto_https off
