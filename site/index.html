@@ -14,45 +14,47 @@
   </head>
 
   <body>
-    <section id="editor">
-      <textarea
-        id="sourceCode"
-        is="highlighted-code"
-        language="html"
-        tab-size="2"
-      >
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="color-scheme" content="light dark">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
-        <title>Hello world!</title>
-    </head>
-    <body>
-        <main class="container">
-            <h1>Hello world!</h1>
-        </main>
-    </body>
-</html>
-    </textarea
-      >
-    </section>
-
-    <section id="webview">
-      <iframe id="webviewIFrame"></iframe>
-    </section>
-
-    <section id="controls">
-      <div class="controls">
-        <a href="#" onClick="goFullscreen()">fullscreen</a> |
-        <a href="https://github.com/dannluciano/html_editor" target="_blank"
-          >github</a
+    <main>
+      <section id="editor">
+        <textarea
+          id="sourceCode"
+          is="highlighted-code"
+          language="html"
+          tab-size="2"
         >
-        <button id="theme-switcher" style="padding: 0 1em">Dark/Light</button>
-      </div>
-    </section>
+  <!doctype html>
+  <html lang="en">
+      <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+          <title>Hello world!</title>
+      </head>
+      <body>
+          <main class="container">
+              <h1>Hello world!</h1>
+          </main>
+      </body>
+  </html>
+      </textarea
+        >
+      </section>
+  
+      <section id="webview">
+        <iframe id="webviewIFrame"></iframe>
+      </section>
+  
+      <section id="controls">
+        <div class="controls">
+          <a href="#" onClick="goFullscreen()">fullscreen</a> |
+          <a href="https://github.com/dannluciano/html_editor" target="_blank"
+            >github</a
+          >
+          <button id="theme-switcher" style="padding: 0 1em">Dark/Light</button>
+        </div>
+      </section>
+    </main>
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"
