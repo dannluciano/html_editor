@@ -1,4 +1,13 @@
-FROM caddy:2.8.4-alpine
+FROM caddy:alpine
+
+EXPOSE 443
 
 COPY Caddyfile /etc/caddy/Caddyfile
-COPY site /srv
+
+COPY site /usr/share/caddy
+
+WORKDIR /srv
+
+RUN ["caddy", "fmt", "--overwrite", "/etc/caddy/Caddyfile"]
+
+CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
