@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HTML Editor</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
+    />
+    <link rel="stylesheet" href="style.css">
+    </style>
+  </head>
+
+  <body>
+    <section id="editor">
+      <textarea
+        id="sourceCode"
+        is="highlighted-code"
+        language="html"
+        tab-size="2"
+      >
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="color-scheme" content="light dark">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+        <title>Hello world!</title>
+    </head>
+    <body>
+        <main class="container">
+            <h1>Hello world!</h1>
+        </main>
+    </body>
+</html>
+    </textarea
+      >
+    </section>
+
+    <section id="webview">
+      <iframe id="webviewIFrame"></iframe>
+    </section>
+
+    <section id="controls">
+      <div class="controls">
+        <a href="#" onClick="goFullscreen()">fullscreen</a> |
+        <a href="https://github.com/dannluciano/html_editor" target="_blank"
+          >github</a
+        >
+        <button id="theme-switcher" style="padding: 0 1em">Dark/Light</button>
+      </div>
+    </section>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"
+      integrity="sha512-01CJ9/g7e8cUmY0DFTMcUw/ikS799FHiOA0eyHsUWfOetgbx/t6oV4otQ5zXKQyIrQGTHSmRVPIgrgLcZi/WMA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script type="module">
+      (async ({ chrome, netscape }) => {
+        // add Safari polyfill if needed
+        if (!chrome && !netscape)
+          await import("https://unpkg.com/@ungap/custom-elements");
+
+        const { default: HighlightedCode } = await import(
+          "https://unpkg.com/highlighted-code"
+        );
+
+        // bootstrap a theme through one of these names
+        // https://github.com/highlightjs/highlight.js/tree/main/src/styles
+
+        const theme = document.documentElement.getAttribute("data-theme");
+        if (theme === "dark") {
+          HighlightedCode.useTheme("github-dark");
+        }
+        if (theme === "light") {
+          HighlightedCode.useTheme("github");
+        }
+      })(self);
+    </script>
+
+    <script>
+      function update() {
+        let newIframe = document.createElement("iframe");
+        const webview = document.querySelector("#webview");
+        webview.replaceChild(
+          newIframe,
+          document.querySelector("#webviewIFrame")
+        );
+        newIframe.id = "webviewIFrame";
+        let outty = newIframe.contentWindow.document;
+        outty.open();
+        let inny = document.getElementById("sourceCode");
+        outty.write(inny.value);
+        outty.close();
+      }
+
+      function goFullscreen() {
+        outWin = window.open();
+        outWin.focus();
+        let outty = outWin.document;
+        outty.open();
+        let inny = document.getElementById("sourceCode");
+        outty.write(inny.value);
+        outty.close();
+      }
+
+      function realtime() {
+        // if (!document.querySelector("#realtime").checked) return;
+        update();
+      }
+
+      function render() {
+        outWin = window.open();
+        outWin.focus();
+        _render(outWin);
+      }
+
+      async function _render(outWin) {
+        let inny = document.querySelector("iframe").contentDocument.body;
+        let sourceCodeUrl = await domtoimage.toPng(inny);
+        let img = document.createElement("img");
+        img.src = sourceCodeUrl;
+        outWin.document.body.appendChild(img);
+      }
+
+      sourceCodeArea = document.getElementById("sourceCode");
+      sourceCodeArea.onkeyup = realtime;
+
+      update();
+    </script>
+    <script src="theme.js"></script>
+  </body>
+</html>

@@ -1,0 +1,99 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    display: grid;
+    grid-template-areas:
+        "editor   webview"
+        "controls controls";
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        display: grid;
+        grid-template-areas:
+            "editor"
+            "webview"
+            "controls";
+    }
+
+    #webview {
+        border-left: unset;
+    }
+}
+
+#controls {
+    grid-area: controls;
+}
+
+#editor {
+    grid-area: editor;
+    height: calc(100vh - 45px);
+    width: 100%;
+    border-bottom: 1px solid #808080;
+}
+
+#webview {
+    grid-area: webview;
+    height: calc(100vh - 45px);
+    width: 100%;
+    border-left: 1px solid #808080;
+    border-bottom: 1px solid #808080;
+}
+
+#webviewIFrame {
+    margin: 0;
+    border: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#sourceCode {
+    width: 100%;
+    height: 100%;
+}
+
+textarea {
+    padding: 10px;
+    resize: none;
+
+    margin: 0;
+    border: 0;
+}
+
+textarea:focus {
+    outline: none;
+}
+
+.controls {
+    padding: 10px;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+.controls a,
+.controls label {
+    text-decoration: none;
+    color: #000000;
+    user-select: none;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.controls a:hover,
+.controls label:hover {
+    background: #f0f0f0;
+}
