@@ -1,0 +1,10 @@
+{
+	"name": "web",
+	"version": "1.0.0",
+	"description": "A lean and fast html editor with instant preview",
+	"scripts": {
+		"start": "npx http-server site"
+	},
+	"author": "",
+	"license": "ISC"
+}
